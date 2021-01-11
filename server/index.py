@@ -1,6 +1,6 @@
 import requests
 import json
-from instagram.instagram_api import InstagramCoreApi
+from server.social_api.instagram.instagram_api import InstagramCoreApi
 
 from decouple import config
 

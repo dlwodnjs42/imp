@@ -1,12 +1,8 @@
 from decouple import config
-from instagram.util import makeGetApiCall, displayApiCallData, setRequestParams
+from social_api.util import makeGetApiCall, displayApiCallData, setRequestParams, makePostApiCall
 
 import requests
 import json
-
-"""
-TODO: WEBHOOKS
-"""
 
 class InstagramCoreAPI:
     def __init__(self, token, ig_username, user_id, page_id, ig_acc_id=None, debug=False):
@@ -77,5 +73,5 @@ class InstagramCoreAPI:
             'access_token': self.user_access_token
         }
         url = self.url + self.instagram_account_id
-        return makeGetApiCall(url, params, self.debug)
+        return makeGetApiCall(url, params, debug=self.debug)
 

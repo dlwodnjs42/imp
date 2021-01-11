@@ -1,7 +1,7 @@
-from server.instagram.core_api import InstagramCoreApi
+from server.social_api.instagram.core_api import InstagramCoreApi
 
 from decouple import config
-from instagram.util import makeGetApiCall, displayApiCallData, setRequestParams
+from social_api.util import makeGetApiCall, displayApiCallData, setRequestParams, makePostApiCall
 
 import requests
 import json
@@ -46,7 +46,7 @@ class UserApi(InstagramCoreApi):
         }
 
         url = self.url + self.instagram_account_id + '/media'
-        return makeGetApiCall(url, params, self.debug)
+        return makeGetApiCall(url, params, debug=self.debug)
 
     def replyToMentionedInMediaObjectCaption(self, media_id, message)
         """ Creates an IG Comment on an IG Media object in which an IG User has been @mentioned in a caption.  """
@@ -58,7 +58,7 @@ class UserApi(InstagramCoreApi):
         }
 
         url = self.url + self.instagram_account_id + '/mentions'
-        return makePostApiCall(url, params, self.debug)
+        return makePostApiCall(url, params, debug=self.debug)
 
     def replyToMentionedInMediaObjectComment(self, media_id, comment_id, message)
         """ Creates an IG Comment on an IG Comment in which an IG User has been @mentioned.  """
@@ -71,7 +71,7 @@ class UserApi(InstagramCoreApi):
         }
 
         url = self.url + self.instagram_account_id + '/mentions'
-        return makePostApiCall(url, params, self.debug)
+        return makePostApiCall(url, params, debug=self.debug)
 
     def readMentionedInComment(self, comment_id, data_fields=None):
         """
@@ -95,7 +95,7 @@ class UserApi(InstagramCoreApi):
         }
 
         url = self.url + self.instagram_account_id
-        return makeGetApiCall(url, params, self.debug)
+        return makeGetApiCall(url, params, debug=self.debug)
 
     def readMentionedInMedia(self, media_id, data_fields=None):
         if not data_fields:
@@ -107,7 +107,7 @@ class UserApi(InstagramCoreApi):
         }
 
         url = self.url + self.instagram_account_id
-        return makeGetApiCall(url, params, self.debug)
+        return makeGetApiCall(url, params, debug=self.debug)
 
 
     def findRecentlySearchedHashtags(self):
@@ -119,7 +119,7 @@ class UserApi(InstagramCoreApi):
             The API returns 25 results per page by default, but you can use the limit parameter to get up to 30 per page (limit=30).
         """
         url = self.url + self.instagram_account_id + '/' + 'recently_searched_hashtags'
-        return makeGetApiCall(url, params, self.debug)
+        return makeGetApiCall(url, params, debug=self.debug)
 
 
     def getIGUserMetadata(self, username):
@@ -129,7 +129,7 @@ class UserApi(InstagramCoreApi):
         }
 
         url = self.url + self.instagram_account_id
-        return makeGetApiCall(url, params, self.debug)
+        return makeGetApiCall(url, params, debug=self.debug)
 
     def getIGUserMedia(self, username, data_fields=None):
         if not data_fields:
@@ -141,7 +141,7 @@ class UserApi(InstagramCoreApi):
         }
 
         url = self.url + self.instagram_account_id
-        return makeGetApiCall(url, params, self.debug)
+        return makeGetApiCall(url, params, debug=self.debug)
 
     def getUserMetadata(self, data_fields=None):
         if not data_fields:
@@ -154,7 +154,7 @@ class UserApi(InstagramCoreApi):
         }
 
         url = self.url + self.instagram_account_id + '/' + ref
-        return makeGetApiCall(url, params, self.debug)
+        return makeGetApiCall(url, params, debug=self.debug)
 
 
 
@@ -177,7 +177,7 @@ class UserApi(InstagramCoreApi):
         }
 
         url = self.url + self.instagram_account_id + '/' + comment_id
-        return makeGetApiCall(url, params, self.debug)
+        return makeGetApiCall(url, params, debug=self.debug)
 
     def getUserInsights(self, metric, period, since=None, until=None, data_fields=None, limit=10):
         """
@@ -205,7 +205,7 @@ class UserApi(InstagramCoreApi):
             params.update({'since': since, 'update':update})
 
         url = self.url + self.instagram_account_id + '/insights'
-        return makeGetApiCall(url, params, self.debug)
+        return makeGetApiCall(url, params, debug=self.debug)
 
     def getUserStories(self, data_fields=None):
         """ Returns a list of story IG Media objects on an IG User. """
@@ -218,7 +218,7 @@ class UserApi(InstagramCoreApi):
         }
 
         url = self.url + self.instagram_account_id + '/stories'
-        return makeGetApiCall(url, params, self.debug)
+        return makeGetApiCall(url, params, debug=self.debug)
 
     def getUserTags(self, data_fields=None):
         """ Returns a list of IG Media objects in which an IG User has been tagged by another Instagram user. """
@@ -231,4 +231,4 @@ class UserApi(InstagramCoreApi):
         }
 
         url = self.url + self.instagram_account_id + '/tags'
-        return makeGetApiCall(url, params, self.debug)
+        return makeGetApiCall(url, params, debug=self.debug)

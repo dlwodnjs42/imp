@@ -1,7 +1,7 @@
-from server.instagram.core_api import InstagramCoreApi
+from server.social_api.instagram.core_api import InstagramCoreApi
 
 from decouple import config
-from instagram.util import makeGetApiCall, displayApiCallData, setRequestParams
+from social_api.util import makeGetApiCall, displayApiCallData, setRequestParams, makePostApiCall
 
 import requests
 import json
@@ -28,14 +28,14 @@ class CommentApi(InstagramCoreApi):
         }
 
         url = self.url + media_id
-        return makePostApiCall(url, params, self.debug)
+        return makePostApiCall(url, params, debug=self.debug)
 
     def getAllCommentReplies(self, comment_id, data_fields):
         params = {
             'access_token': self.user_access_token
         }
         url = self.url + comment_id + '/replies'
-        return makeGetApiCall(url, params, self.debug)
+        return makeGetApiCall(url, params, debug=self.debug)
 
     def replyToComment(self, comment_id, message):
         params = {
@@ -43,7 +43,7 @@ class CommentApi(InstagramCoreApi):
             'access_token': self.user_access_token
         }
         url = self.url + comment_id + '/replies'
-        return makePostApiCall(url, params, self.debug)
+        return makePostApiCall(url, params, debug=self.debug)
 
     def hideComments(self, comment_id, hide)
         params = {
@@ -52,7 +52,7 @@ class CommentApi(InstagramCoreApi):
         }
 
         url = self.url + comment_id
-        return makePostApiCall(url, params, self.debug)
+        return makePostApiCall(url, params, debug=self.debug)
 
     def deleteComments(self, comment_id):
-        return makeDeleteApiCall(url, self.debug)
+        return makeDeleteApiCall(url, debug=self.debug)

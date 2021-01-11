@@ -1,7 +1,7 @@
-from server.instagram.core_api import InstagramCoreApi
+from server.social_api.instagram.core_api import InstagramCoreApi
 
 from decouple import config
-from instagram.util import makeGetApiCall, displayApiCallData, setRequestParams
+from social_api.util import makeGetApiCall, displayApiCallData, setRequestParams, makePostApiCall
 
 import requests
 import json
@@ -29,5 +29,5 @@ class HashtagSearchApi(InstagramCoreApi):
         }
 
         url = self.url + 'ig_hashtag_search'
-        return makePostApiCall(url, params, self.debug)
+        return makePostApiCall(url, params, debug=self.debug)
 

@@ -1,7 +1,7 @@
-from server.instagram.core_api import InstagramCoreApi
+from server.social_api.instagram.core_api import InstagramCoreApi
 
 from decouple import config
-from instagram.util import makeGetApiCall, displayApiCallData, setRequestParams
+from social_api.util import makeGetApiCall, displayApiCallData, setRequestParams, makePostApiCall
 
 import requests
 import json
@@ -32,7 +32,7 @@ class MediaApi(InstagramCoreApi):
         }
 
         url = self.url + media_id + '/comments'
-        return makePostApiCall(url, params, self.debug)
+        return makePostApiCall(url, params, debug=self.debug)
 
     def getMediaObjectComments(self, media_id):
         """ Returns a list of IG Comments on an IG Media object. """
@@ -41,7 +41,7 @@ class MediaApi(InstagramCoreApi):
         }
 
         url = self.url + media_id + '/comments'
-        return makeGetApiCall(url, params, self.debug)
+        return makeGetApiCall(url, params, debug=self.debug)
 
 
     def getChildrenMediaObjects(self, media_id):
@@ -51,7 +51,7 @@ class MediaApi(InstagramCoreApi):
         }
 
         url = self.url + media_id + '/children'
-        return makeGetApiCall(url, params, self.debug)
+        return makeGetApiCall(url, params, debug=self.debug)
 
     def getMediaObjectInsights(self, media_id, metric):
         """ Get insights data on an IG Media object. Values for each metric are calculated at the time of the request.
@@ -70,7 +70,7 @@ class MediaApi(InstagramCoreApi):
         }
 
         url = self.url + media_id + '/insights'
-        return makeGetApiCall(url, params, self.debug)
+        return makeGetApiCall(url, params, debug=self.debug)
 
 
 

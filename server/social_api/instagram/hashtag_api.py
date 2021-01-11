@@ -1,6 +1,6 @@
-from server.instagram.core_api import InstagramCoreApi
+from server.social_api.instagram.core_api import InstagramCoreApi
 from decouple import config
-from instagram.util import makeGetApiCall, displayApiCallData, setRequestParams
+from social_api.util import makeGetApiCall, displayApiCallData, setRequestParams, makePostApiCall
 
 import requests
 import json
@@ -30,7 +30,7 @@ class HashtagApi(InstagramCoreApi):
 
         url = self.url + hashtag_id
 
-        return makeGetApiCall(url, params, self.debug)
+        return makeGetApiCall(url, params, debug=self.debug)
 
     def getRecentMediaWithHashtag(self, hashtag_id, user_id, data_fields=None):
         """
@@ -61,7 +61,7 @@ class HashtagApi(InstagramCoreApi):
 
         url = self.url + hashtag_id + '/recent_media'
 
-        return makeGetApiCall(url, params, self.debug)
+        return makeGetApiCall(url, params, debug=self.debug)
 
     def getTopMediaWithHashtag(self, hashtag_id, user_id, data_fields=None):
         """
@@ -92,4 +92,4 @@ class HashtagApi(InstagramCoreApi):
 
         url = self.url + hashtag_id + '/top_media'
 
-        return makeGetApiCall(url, params, self.debug)
+        return makeGetApiCall(url, params, debug=self.debug)
