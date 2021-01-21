@@ -17,13 +17,16 @@ def makeGetApiCall(url, params=None, headers=None, debug=False):
     return response
 
 def makePostApiCall(url, params, headers=None, data=None, debug=False)
-    data = requests.post(url, params=params, data=data)
+    data = requests.post(url, params=params, headers=headers, data=data)
 
     response = dict()
     response['url'] = url
     response['params'] = params
     response['headers'] = headers
     response['json_data'] = json.loads(data.content)
+
+    if debug:
+        displayApiCallData(response)
     return response
 
 def makePutApiCall(url, params, data=None):

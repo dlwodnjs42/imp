@@ -143,19 +143,18 @@ class UserApi(InstagramCoreApi):
         url = self.url + self.instagram_account_id
         return makeGetApiCall(url, params, debug=self.debug)
 
-    def getUserMetadata(self, data_fields=None):
-        if not data_fields:
-                # set default fields
-                data_fields = '{id,biography,ig_id,followers_count,follows_count,media_count,name,profile_picture_url,username,website}'
+    # def getUserMetadata(self, data_fields=None):
+    #     if not data_fields:
+    #             # set default fields
+    #             data_fields = '{id,biography,ig_id,followers_count,follows_count,media_count,name,profile_picture_url,username,website}'
 
-        params = {
-            'fields': data_fields,
-            'access_token': self.user_access_token
-        }
+    #     params = {
+    #         'fields': data_fields,
+    #         'access_token': self.user_access_token
+    #     }
 
-        url = self.url + self.instagram_account_id + '/' + ref
-        return makeGetApiCall(url, params, debug=self.debug)
-
+    #     url = self.url + self.instagram_account_id + '/'
+    #     return makeGetApiCall(url, params, debug=self.debug)
 
 
     def getUserComments(self, media_id, data_fields=None):
